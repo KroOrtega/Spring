@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Person Data</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="layout/template :: header"></header>
+        <h2>Person Data</h2>
+        <!-- Hyperlink Back to Start page -->
+        <a th:href="@{/}">Return</a>
+        <br/>
+        <br/>
+        
+        <form th:action="@{/save}" method="post" th:object="${person}">
+            
+            <input type="hidden" name="idPerson" th:field="*{idPerson}">
+            <label for="name">Name:</label>
+            <input type="text" name="name" th:field="*{name}"></input>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+            <br/>
+            
+            <label for="lastname">Lastname:</label>
+            <input type="text" name="lastname" th:field="*{lastname}"></input>
+            <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</span>
+            <br/>
+            
+            <label for="email">E-mail:</label>
+            <input type="text" name="email" th:field="*{email}"></input>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail Error</span>
+            <br/>
+            
+            <label for="phone">Phone:</label>
+            <input type="tel" name="phone" th:field="*{phone}"></input>
+
+            <br/>
+            
+            <input type="submit" name="save" value="Save"/>
+            
+        </form>
+        <footer th:replace="layout/template :: footer"></footer>
+    </body>
+</html>

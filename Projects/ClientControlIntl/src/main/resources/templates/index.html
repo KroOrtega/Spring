@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Start</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header th:replace="layout/template :: header"></header>
+        <!-- Insert Hyperlink Text -->
+        <a th:href="@{/add}">[[#{person.create}]]</a>
+        <br>
+        <!-- Validate if array is not empty -->
+        <div th:if="${people != null and !people.empty}">
+            <table border="1">
+                <tr>
+                    <th>[[#{person.name}]]</th>
+                    <th>[[#{person.lastname}]]</th>
+                    <th>[[#{person.email}]]</th>
+                    <th>[[#{person.phone}]]</th>
+                    <th>[[#{action.update}]]</th>
+                    <th>[[#{action.delete}]]</th>
+                </tr>
+                <!-- Using Thymeleaf to iterate through array -->
+                <tr th:each="person : ${people}">
+                    <td th:text="${person.name}">Show name</td>
+                    <td th:text="${person.lastname}">Show lastname</td>
+                    <td th:text="${person.email}">Show email</td>
+                    <td th:text="${person.phone}">Show phone</td>
+                    <td><a th:href="@{/update/} + ${person.idPerson}"/>[[#{action.update}]]</td>
+                    <td><a th:href="@{/delete(idPerson=${person.idPerson})}" th:text="#{action.delete}"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${people == null and people.empty}">
+            [[#{person.emptyList}]]
+        </div>
+        <footer th:replace="layout/template :: footer"></footer>
+    </body>
+</html>

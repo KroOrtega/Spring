@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Start</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Start</h1>
+        <p th:text="${msg}"></p>
+        <p th:text="${greeting}"></p>
+        </br>
+        Name: <span th:text="${person.name}">Show name</span>
+        </br>
+        Lastname: <span th:text="${person.lastName}">Show lastname</span>
+        </br>
+        Email: <span th:text="${person.email}">Show email</span>
+        </br>
+        Phone: <span th:text="${person.phone}">Show phone</span>
+        </br>
+        </br>
+        <!-- Validate if array is not empty -->
+        <div th:if="${peopleList != null and !peopleList.empty}">
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>E-Mail</th>
+                    <th>Phone</th>
+                </tr>
+                <!-- Using Thymeleaf to iterate through array -->
+                <tr th:each="person : ${peopleList}">
+                    <td th:text="${person.name}">Show name</td>
+                    <td th:text="${person.lastName}">Show lastname</td>
+                    <td th:text="${person.email}">Show email</td>
+                    <td th:text="${person.phone}">Show phone</td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${peopleList == null and peopleList.empty}">
+            The list of people is empty.
+        </div>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Template</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:fragment="header">
+            <h1 th:text="#{template.mainHeader}">Main header</h1>
+        </header>
+        <footer th:fragment="footer">
+            <p>[[#{template.footer}]] <a href="http://www.globalmentoring.com.mx" target="_blank">Globalmentoring.com.mx</a></p>
+        </footer>
+    </body>
+</html>

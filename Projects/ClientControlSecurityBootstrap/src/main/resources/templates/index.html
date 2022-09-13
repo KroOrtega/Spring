@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/layout/template :: head">
+        <title>Start</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        
+        <div class="row">
+        <!-- Template fragment import -->
+        <header th:replace="layout/template :: header"></header>
+        <!-- Organize page into sections -->
+        <section th:replace="layout/addButtons :: addButtons"></section>
+        <section th:replace="layout/listClients :: listClients"></section>
+        <section th:replace="layout/addClient :: addClient"></section>
+        </div>
+        <!-- Template fragment import -->
+        <footer th:replace="layout/template :: footer"></footer>
+
+    </body>
+</html>

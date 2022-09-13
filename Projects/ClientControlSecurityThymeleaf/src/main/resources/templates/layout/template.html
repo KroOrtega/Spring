@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Template</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:fragment="header">
+            <h1 th:text="#{template.mainHeader}">Main header</h1>
+        </header>
+        <footer th:fragment="footer">
+            <div>
+                <br/>
+                <a th:href="@{/(lang=en)}">EN</a>  |  
+                <a th:href="@{/(lang=es)}">ES</a>
+                <span>[[#{template.footer}]] <a href="http://www.globalmentoring.com.mx" target="_blank">Globalmentoring.com.mx</a></span>
+                <form method="POST" th:action="@{/logout}">
+                    <br/>
+                    <b>User: </b> <span sec:authentication="name">Logged user</span> |
+                    <b>Roles: </b> <span sec:authentication="principal.authorities">Roles</span>
+                    <!-- Call node parent (form) and invoke its submit() method. -->
+                    <a href="#" onclick="this.parentNode.submit();">Logout</a>
+                </form>
+                
+            </div>
+        </footer>
+    </body>
+</html>

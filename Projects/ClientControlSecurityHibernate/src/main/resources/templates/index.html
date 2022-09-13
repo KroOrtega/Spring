@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Start</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header th:replace="layout/template :: header"></header>
+        <!-- Allowing to see the following link depending on user logged -->
+        <a sec:authorize="hasRole('ROLE_ADMIN')"  th:href="@{/add}">[[#{person.create}]]</a>
+        <br>
+        <!-- Validate if array is not empty -->
+        <div th:if="${people != null and !people.empty}">
+            <table border="1">
+                <tr>
+                    <th>[[#{person.name}]]</th>
+                    <th>[[#{person.lastname}]]</th>
+                    <th>[[#{person.email}]]</th>
+                    <th>[[#{person.phone}]]</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.update}]]</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.delete}]]</th>
+                </tr>
+                <!-- Using Thymeleaf to iterate through array -->
+                <tr th:each="person : ${people}">
+                    <td th:text="${person.name}">Show name</td>
+                    <td th:text="${person.lastname}">Show lastname</td>
+                    <td th:text="${person.email}">Show email</td>
+                    <td th:text="${person.phone}">Show phone</td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/update/} + ${person.idPerson}" th:text="#{action.update}"/></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/delete(idPerson=${person.idPerson})}" th:text="#{action.delete}"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${people == null and people.empty}">
+            [[#{person.emptyList}]]
+        </div>
+        <footer th:replace="layout/template :: footer"></footer>
+    </body>
+</html>

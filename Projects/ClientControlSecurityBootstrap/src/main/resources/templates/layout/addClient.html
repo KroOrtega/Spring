@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <title>Add Client</title>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+
+        <section th:fragment="addClient">
+            
+            <div id="addClient" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title" tx:text="#{action.add}">Add Client</h5>
+                            <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <!-- Validation via Bootstrap form -->
+                        <form th:action="@{/save}" th:object="${person}" method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="name" th:text="#{person.name}">Name</label>
+                                    <input type="text" class="form-control" name="name" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" th:text="#{person.lastname}">Lastname</label>
+                                    <input type="text" class="form-control" name="lastname" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" th:text="#{person.email}">E-Mail</label>
+                                    <input type="email" class="form-control" name="email" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" th:text="#{person.phone}">Phone</label>
+                                    <input type="tel" class="form-control" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="balance" th:text="#{person.balance}">Balance</label>
+                                    <input type="number" class="form-control" name="balance" required="true" step="any">
+                                        <!-- step="any" to allow for decimal numbers -->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" th:text="#{action.save}">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
+    </body>
+</html>

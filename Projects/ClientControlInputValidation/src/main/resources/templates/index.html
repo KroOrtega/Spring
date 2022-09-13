@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Start</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Start</h1>
+        <!-- Insert Hyperlink Text -->
+        <a th:href="@{/add}">Create Person</a>
+        <br>
+        <!-- Validate if array is not empty -->
+        <div th:if="${people != null and !people.empty}">
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>E-Mail</th>
+                    <th>Phone</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                <!-- Using Thymeleaf to iterate through array -->
+                <tr th:each="person : ${people}">
+                    <td th:text="${person.name}">Show name</td>
+                    <td th:text="${person.lastname}">Show lastname</td>
+                    <td th:text="${person.email}">Show email</td>
+                    <td th:text="${person.phone}">Show phone</td>
+                    <td><a th:href="@{/update/} + ${person.idPerson}" th:text="Update"/></td>
+                    <td><a th:href="@{/delete(idPerson=${person.idPerson})}" th:text="Delete"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${people == null and people.empty}">
+            The list of people is empty.
+        </div>
+    </body>
+</html>
